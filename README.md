@@ -1,50 +1,152 @@
 # DevHub
 
-A modern developer platform inspired by GitHub’s simplicity and power. Built with React and Tailwind CSS.
+A modern developer collaboration platform with authentication, user profiles, and AI-powered chatbot assistance.
 
-## Prerequisites
+## 🚀 Features
 
-Before you begin, ensure you have **Node.js** installed on your machine.
-You can check if it's installed by running:
+- **User Authentication**: Secure login/signup with session-based authentication
+- **User Profiles**: Customizable user profiles with avatar support
+- **AI Chatbot**: Intelligent chatbot with context memory
+- **Responsive Design**: Beautiful UI that works on all devices
+- **Google OAuth**: Sign in with Google (optional)
 
-```bash
-node -v
-npm -v
+## 🛠️ Tech Stack
+
+### Frontend
+- React 18
+- Vite
+- React Router
+- Tailwind CSS
+- Lucide React (icons)
+
+### Backend
+- Node.js
+- Express
+- SQLite (better-sqlite3)
+- Session-based authentication
+- OpenAI API integration
+
+## 📋 Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+
+## 🔧 Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <your-repo-url>
+   cd "project /Home page"
+   ```
+
+2. **Install frontend dependencies**
+   ```bash
+   npm install
+   ```
+
+3. **Install backend dependencies**
+   ```bash
+   cd server
+   npm install
+   cd ..
+   ```
+
+4. **Set up environment variables**
+
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_API_URL=http://localhost:5000
+   ```
+
+   Create a `.env` file in the `server` directory:
+   ```env
+   SESSION_SECRET=your-secret-key-here
+   OPENAI_API_KEY=your-openai-api-key-here
+   PORT=5000
+   ```
+
+## 🚀 Running the Application
+
+1. **Start the backend server**
+   ```bash
+   cd server
+   npm start
+   ```
+   The server will run on http://localhost:5000
+
+2. **Start the frontend (in a new terminal)**
+   ```bash
+   npm run dev
+   ```
+   The app will run on http://localhost:5173
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork the repository**
+2. **Create a feature branch**
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+3. **Make your changes**
+4. **Commit your changes**
+   ```bash
+   git commit -m "Add: your feature description"
+   ```
+5. **Push to your fork**
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+6. **Open a Pull Request**
+
+### Contribution Guidelines
+
+- Write clear, descriptive commit messages
+- Follow the existing code style
+- Test your changes before submitting
+- Update documentation as needed
+
+## 📁 Project Structure
+
+```
+.
+├── src/                  # Frontend source code
+│   ├── components/       # React components
+│   ├── pages/           # Page components
+│   └── App.jsx          # Main app component
+├── server/              # Backend source code
+│   ├── auth.js          # Authentication routes
+│   ├── profile.js       # Profile management
+│   ├── chatbot.js       # Chatbot API
+│   ├── db.js            # Database setup
+│   └── index.js         # Server entry point
+├── public/              # Static assets
+└── README.md            # This file
 ```
 
-If these commands fail, you need to install Node.js from [nodejs.org](https://nodejs.org/).
+## 📝 Documentation
 
-## Getting Started
+For detailed documentation, see [DOCUMENTATION.md](./DOCUMENTATION.md)
 
-1.  **Open the project folder**:
-    Open the folder `/home/pradhyum/project /Home page` in VSCode.
+For quick reference, see [QUICK_REFERENCE.md](./QUICK_REFERENCE.md)
 
-2.  **Install Dependencies**:
-    Open the terminal in VSCode (`Ctrl + \``) and run:
-    ```bash
-    npm install
-    ```
+## 📄 License
 
-3.  **Run the Development Server**:
-    ```bash
-    npm run dev
-    ```
+This project is open source and available under the MIT License.
 
-4.  **View the App**:
-    Open your browser and navigate to `http://localhost:5173`.
+## 👥 Contributors
 
-## Features
+Thanks to all contributors who help make DevHub better!
 
-*   **Modern UI**: Clean, minimal design inspired by GitHub.
-*   **Dark Mode**: Fully supported with a toggle switch.
-*   **Responsive**: Works on all device sizes.
-*   **Routing**: Includes Home and Login pages.
+## 🐛 Issues
 
-## Project Structure
+Found a bug? Please open an issue with:
+- Clear description of the problem
+- Steps to reproduce
+- Expected vs actual behavior
+- Screenshots (if applicable)
 
-*   `src/components`: Reusable UI components (Navbar, Footer, etc.).
-*   `src/pages`: Page components (Home, Login).
-*   `src/index.css`: Global styles and Tailwind setup.
-# devhub
-# devhub
-# devhub
+## 💬 Support
+
+For questions or support, please open an issue or reach out to the maintainers.

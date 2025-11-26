@@ -1,0 +1,31 @@
+{
+    "name": "devhub-backend",
+    "version": "1.0.0",
+    "description": "Simple JWT authentication backend for DevHub",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "dev": "node index.js"
+    },
+    "keywords": [
+        "jwt",
+        "auth",
+        "express"
+    ],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "bcryptjs": "^2.4.3",
+        "better-sqlite3": "^9.2.2",
+        "better-sqlite3-session-store": "^0.1.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.2",
+        "express-session": "^1.18.2",
+        "jsonwebtoken": "^9.0.2",
+        "multer": "^2.0.2",
+        "openai": "^6.9.1",
+        "passport": "^0.7.0",
+        "passport-google-oauth20": "^2.0.0"
+    }
+}
