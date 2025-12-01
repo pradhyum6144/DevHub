@@ -1,0 +1,38 @@
+.profile{
+    border: 1px solid #30363d;
+    background-color: #161b22;
+}
+.profile .profile-section{
+    display: flex;
+    align-items: center;
+    margin:20px;
+    margin-left: 225px;
+}
+
+.profile .picture{
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+}
+
+.profile .details{
+    display:flex;
+    flex-direction: column;
+    margin: 20px;
+    border: none;
+}
+
+.profile .user-name{
+    font-size: 27px;
+    font-weight: 600;
+    color: #c9d1d9;
+    padding: 5px;
+    
+}
+
+.profile .user-email{
+    font-size: 15px;
+    font-weight: 600;
+    color: #8b949e;
+    padding: 5px;
+}
