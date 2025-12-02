@@ -1,0 +1,119 @@
+.input-issue{
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    width: 25vw;
+    font-size: 14px;
+    height: 35px;
+    border-radius: 5px;
+    color:#c9d1d9;
+    padding: 10px;
+    min-width: 200px;
+}
+
+.issue-card{
+    cursor:pointer;
+}
+
+
+.input-issue::placeholder{
+    color: #8b949e;
+    padding-left: 1px;
+}
+
+.myh1{
+    color: #c9d1d9;
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 600;
+    padding-bottom: 20px;
+}
+
+.issue-container{
+    margin-left: 10vw;
+    margin-right:10vw;
+}
+
+.issue-row{
+    background-color: #161b22;
+    margin-top: 30px;
+    border-radius: 5px;
+    border: 1px solid #30363d;
+    height: 115px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.25s ease ;
+}
+
+
+.issue-row:hover{
+    transform: translateY(-4px);
+}
+
+.issue-Details{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.issueName{
+    font-size: 25px;
+    color: #c9d1d9;
+    text-wrap: wrap;
+    font-weight: 600;
+    padding-left:15px;
+}
+
+.issueDetails{
+    color: #8b949e;
+    padding-top: 15px;
+    margin-left: 15px;
+}
+
+.tag{
+    margin: 20px;
+    padding: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 15px;
+    border:none;
+    background-color: #30363d;
+    color: #8b949e;
+    border-radius: 15px;
+}
+
+.pagination-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.prev-Issue{
+    color: #c9d1d9;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 20px;
+    transition: all 0.25s ease;
+    text-align: center;
+    cursor: pointer;
+}
+
+.display{
+    color: #c9d1d9;
+}
+
+.next-issue{
+    color: #c9d1d9;
+    border: 1px solid;
+    border-radius: 10px;
+    padding: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 20px;
+    transition: all 0.25s ease;
+    text-align: center;
+    cursor: pointer;
+}

@@ -10,6 +10,7 @@ import AuthCallback from './pages/AuthCallback';
 import Docs from './pages/Docs';
 import Dashboard from './pages/Dashboard';
 import ProfileSettings from './pages/ProfileSettings';
+import OrganizationPage from './pages/OrganizationPage'; 
 
 /**
  * App Component - Main Application Entry Point
@@ -48,6 +49,14 @@ function App() {
                             </ProtectedRoute>
                         }
                     />
+
+                    <Route 
+                        path='/dashboard/:orgId' 
+                        element={   
+                            <OrganizationPage />
+                            } 
+                        />
+
                     <Route
                         path="/settings/profile"
                         element={

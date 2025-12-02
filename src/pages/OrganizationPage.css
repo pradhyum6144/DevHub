@@ -1,0 +1,85 @@
+.details{
+    background-color: #161b22;
+    border: 1px solid #30363d;
+}
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+
+.back{
+    border: none;
+    background-color: #000000;
+    color: #c9d1d9;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right:15px;
+    border-radius: 25px;
+    text-wrap: wrap;
+    margin: 20px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.back:hover{
+    transform: scale(1.02);
+}
+
+.back-class{
+    width: 30vw;
+}
+
+.org-name{
+    color: #c9d1d9;
+    font-size: 25px;
+    font-weight: 600;
+    margin-top: 20px;
+    text-wrap: wrap;
+    margin-left: 10px;
+}
+
+.org-per-detials{
+    margin-left: 30px;
+}
+
+.org-info{
+    color: #8b949e;
+    margin: 10px;
+    text-wrap:wrap;
+}
+
+.org-issue-info{
+    display: flex;
+}
+
+.open-issue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #8b949e;
+    gap: 5px;
+    font-size: 14px;
+    padding: 10px;
+}
+
+.close-issue{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#8b949e;
+    font-size: 14px;
+    gap: 5px;
+    padding: 10px;
+}
+
+.contributors{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #8b949e;
+    font-size: 14px;
+    gap: 5px;
+    padding: 10px;
+}
