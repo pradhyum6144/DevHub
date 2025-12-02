@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from 'react-router-dom'
 import Navbar1 from '../components/Navbar1'
-import IssueList from '../components/issuelist.jsx';
+import IssueList from '../components/IssueList.jsx'
 import { data } from '../components/data.js';
 import './OrganizationPage.css'
 import { GoIssueOpened, GoIssueClosed } from "react-icons/go"
