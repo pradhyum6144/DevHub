@@ -130,23 +130,10 @@ export default function Login() {
                         <div className="flex items-center justify-between">
                             {/* Remember Me Checkbox */}
                             <div className="flex items-center">
-                                <input
-                                    id="remember-me"
-                                    name="remember-me"
-                                    type="checkbox"
-                                    className="h-4 w-4 rounded border-slate-700 bg-[#0d1117] text-blue-600 focus:ring-blue-500 focus:ring-offset-0"
-                                />
-                                <label htmlFor="remember-me" className="ml-2 block text-sm text-slate-300">
-                                    Remember me
-                                </label>
+                                
                             </div>
 
-                            {/* Forgot Password Link */}
-                            <div className="text-sm">
-                                <a href="#" className="font-medium text-blue-500 hover:text-blue-400 transition-colors">
-                                    Forgot password?
-                                </a>
-                            </div>
+                            
                         </div>
 
                         {/* Submit Button */}

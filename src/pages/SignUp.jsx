@@ -257,7 +257,7 @@ export default function SignUp() {
                         </Button>
 
                         {/* Terms and Privacy Notice */}
-                        <p className="text-xs text-slate-500 text-center">
+                        {/* <p className="text-xs text-slate-500 text-center">
                             By creating an account, you agree to the{' '}
                             <a href="#" className="text-blue-500 hover:underline">
                                 Terms of Service
@@ -267,7 +267,7 @@ export default function SignUp() {
                                 DevHub Privacy Statement
                             </a>
                             . We'll occasionally send you account-related emails.
-                        </p>
+                        </p> */}
                     </form>
                 </div>
             </div>

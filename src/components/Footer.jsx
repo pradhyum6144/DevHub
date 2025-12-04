@@ -11,13 +11,13 @@ export default function Footer() {
                         <span className="font-semibold text-slate-500 dark:text-slate-400">DevHub</span>
                     </div>
 
-                    <div className="flex flex-wrap gap-8 text-sm text-slate-500 dark:text-slate-400">
+                    {/* <div className="flex flex-wrap gap-8 text-sm text-slate-500 dark:text-slate-400">
                         <Link to="/docs" className="hover:text-slate-900 dark:hover:text-white transition-colors">Docs</Link>
                         <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">API</a>
                         <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Status</a>
                         <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Blog</a>
                         <a href="#" className="hover:text-slate-900 dark:hover:text-white transition-colors">Support</a>
-                    </div>
+                    </div> */}
 
                     <div className="text-sm text-slate-400">
                         © 2025 DevHub
