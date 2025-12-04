@@ -28,7 +28,6 @@ function OrganizationPage(){
                         <div className="org-issue-info">
                             <span className='open-issue'><GoIssueOpened color="#56d364"/>{ org.openIssues } Open</span>
                             <span className='close-issue'><GoIssueClosed color="#8250df"/>{ org.closedIssues } Closed</span>
-                            <span className='contributors'>👥{ org.contributors } Contributor</span>
                         </div>
                     </div>
                 </div>

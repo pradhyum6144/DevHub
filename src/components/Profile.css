@@ -8,8 +8,8 @@
 .profile .profile-section{
     display: flex;
     align-items: center;
-    margin: 20px;
-    margin-left: 225px;   /* Desktop only */
+    /* margin: 20px; */
+    margin-left: 225px;  /* Desktop only */
 }
 
 .profile .picture{
@@ -22,6 +22,7 @@
     display: flex;
     flex-direction: column;
     margin: 20px;
+    border:none;
 }
 
 .profile .user-name{
@@ -47,6 +48,8 @@
     .profile .profile-section{
         margin-left: 40px;
         margin-right: 20px;
+        display: flex;
+        flex-direction:row;
     }
 
     .profile .picture{
@@ -67,7 +70,7 @@
 @media (max-width: 480px){
 
     .profile .profile-section{
-        flex-direction: column;      /* Stack vertically */
+        flex-direction: row;
         align-items: center;
         margin-left: 0;
         margin-right: 0;
