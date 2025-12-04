@@ -46,6 +46,8 @@ export default function Home() {
                 onEmailChange={setHeroEmail}
                 onSignup={handleSignup}
             />
+            <WorkflowSection />
+            
 
             {/* Footer CTA - Final call-to-action */}
             <FooterCTA
