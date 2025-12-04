@@ -12,7 +12,7 @@ function Search() {
   );
 
   const [currentPage , setCurrentPage] = useState(1);
-  const orgsPerPage = 10;
+  const orgsPerPage = 5;
 
   const  indexOfLastOrg = currentPage * orgsPerPage;
   const indexOfFirstOrg = indexOfLastOrg - orgsPerPage;
