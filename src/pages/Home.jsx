@@ -47,12 +47,6 @@ export default function Home() {
                 onSignup={handleSignup}
             />
 
-            {/* Security Section - AI-powered security features */}
-            <SecuritySection />
-
-            {/* Workflow Section - Workflow acceleration with AI */}
-            <WorkflowSection />
-
             {/* Footer CTA - Final call-to-action */}
             <FooterCTA
                 email={footerEmail}

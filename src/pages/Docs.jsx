@@ -416,10 +416,10 @@ export default function Docs() {
 
                         {/* Help and Support Section */}
                         <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t border-slate-800">
-                            <h2 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Help and support</h2>
+                            {/* <h2 className="text-lg sm:text-xl font-bold text-white mb-4 sm:mb-6">Help and support</h2> */}
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-                                <div className="bg-[#161b22] border border-slate-800 p-4 sm:p-6 rounded-lg">
+                                {/* <div className="bg-[#161b22] border border-slate-800 p-4 sm:p-6 rounded-lg">
                                     <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Did you find what you needed?</h3>
                                     {feedback ? (
                                         <div className="text-green-400 font-medium text-sm">
@@ -442,7 +442,7 @@ export default function Docs() {
                                         </div>
                                     )}
                                     <a href="#" className="block mt-3 sm:mt-4 text-xs sm:text-sm text-blue-400 hover:underline">Privacy policy</a>
-                                </div>
+                                </div> */}
 
                                 <div className="bg-[#161b22] border border-slate-800 p-4 sm:p-6 rounded-lg">
                                     <h3 className="font-semibold text-white mb-3 sm:mb-4 text-sm sm:text-base">Help us make these docs great!</h3>
@@ -455,15 +455,15 @@ export default function Docs() {
                                     >
                                         <ExternalLink className="w-4 h-4" /> Make a contribution
                                     </Link>
-                                    <a href="#" className="block mt-3 sm:mt-4 text-xs sm:text-sm text-blue-400 hover:underline">Learn how to contribute</a>
+                                    {/* <a href="#" className="block mt-3 sm:mt-4 text-xs sm:text-sm text-blue-400 hover:underline">Learn how to contribute</a> */}
                                 </div>
                             </div>
 
                             <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center text-center">
-                                <Link to="/login" className="text-blue-400 hover:underline font-medium text-sm">
+                                {/* <Link to="/login" className="text-blue-400 hover:underline font-medium text-sm">
                                     Still need help?
-                                </Link>
-                                <span className="text-slate-600 hidden sm:inline">|</span>
+                                </Link> */}
+                                {/* <span className="text-slate-600 hidden sm:inline"></span> */}
                                 <Link to="/login" className="text-blue-400 hover:underline font-medium text-sm">
                                     Get Started
                                 </Link>
