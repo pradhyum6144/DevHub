@@ -58,7 +58,7 @@ export default function HeroSection({ email, onEmailChange, onSignup }) {
                 {/* Secondary CTA */}
                 <div className="mt-6 px-4">
                     <Link to="/login" className="inline-block px-6 py-3 border border-slate-600 rounded-md text-white font-bold hover:border-slate-400 transition-colors text-sm sm:text-base">
-                        Try DevHub Copilot free
+                        Try DevHub Gemini free
                     </Link>
                 </div>
             </div>
