@@ -2,6 +2,7 @@
     background-color: #161b22;
     border: 1px solid #30363d;
 }
+
 .container{
     display: flex;
     justify-content: center;
@@ -13,11 +14,8 @@
     border: none;
     background-color: #000000;
     color: #c9d1d9;
-    padding: 10px;
-    padding-left: 15px;
-    padding-right:15px;
+    padding: 10px 15px;
     border-radius: 25px;
-    text-wrap: wrap;
     margin: 20px;
     cursor: pointer;
     transition: all 0.25s ease;
@@ -36,8 +34,8 @@
     font-size: 25px;
     font-weight: 600;
     margin-top: 20px;
-    text-wrap: wrap;
     margin-left: 10px;
+    text-wrap: wrap;
 }
 
 .org-per-detials{
@@ -47,33 +45,15 @@
 .org-info{
     color: #8b949e;
     margin: 10px;
-    text-wrap:wrap;
+    text-wrap: wrap;
 }
 
 .org-issue-info{
     display: flex;
 }
 
-.open-issue{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #8b949e;
-    gap: 5px;
-    font-size: 14px;
-    padding: 10px;
-}
-
-.close-issue{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:#8b949e;
-    font-size: 14px;
-    gap: 5px;
-    padding: 10px;
-}
-
+.open-issue,
+.close-issue,
 .contributors{
     display: flex;
     justify-content: center;
@@ -82,4 +62,103 @@
     font-size: 14px;
     gap: 5px;
     padding: 10px;
+}
+
+
+
+/* ---------------------- RESPONSIVE ---------------------- */
+
+/* Tablets */
+@media (max-width: 768px){
+
+    .container{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 20px;
+    }
+
+    .back-class{
+        width: auto;
+        margin-left: 10px;
+    }
+
+    .org-name{
+        font-size: 22px;
+        margin-left: 10px;
+    }
+
+    .org-per-detials{
+        margin-left: 10px;
+    }
+
+    .org-info{
+        font-size: 14px;
+        margin: 8px 10px;
+    }
+
+    .org-issue-info{
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        margin-left: 10px;
+    }
+
+    .open-issue,
+    .close-issue,
+    .contributors{
+        padding: 5px 0;
+        justify-content: flex-start;
+    }
+}
+
+
+/* Mobile */
+@media (max-width: 480px){
+
+    .container{
+        padding: 10px;
+    }
+
+    .back-class{
+        width: 100%;
+        text-align: left;
+        margin-left: 0;
+    }
+
+    .back{
+        font-size: 14px;
+        padding: 8px 15px;
+    }
+
+    .org-name{
+        font-size: 20px;
+        margin-left: 0;
+        text-align: left;
+        padding: 0 10px;
+    }
+
+    .org-per-detials{
+        margin-left: 0;
+        padding: 0 10px;
+    }
+
+    .org-info{
+        font-size: 13px;
+        padding: 0 10px;
+        margin: 5px 0;
+    }
+
+    .org-issue-info{
+        flex-direction: column;
+        gap: 5px;
+        padding: 0 10px;
+    }
+
+    .open-issue,
+    .close-issue,
+    .contributors{
+        font-size: 13px;
+        padding: 3px 0;
+        justify-content: flex-start;
+    }
 }

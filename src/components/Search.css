@@ -1,12 +1,12 @@
 .org-text {
     display: block;
     font-weight: bold;
-    font-family: -apple-system,system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,'Open Sans','Helvetica Neue',sans-serif;
     color: #c9d1d9;
     font-size: 20px;
     margin-left: 10vw;
-    box-sizing: border-box;
     padding-top: 15px;
+    box-sizing: border-box;
 }
 
 .input-wrapper{
@@ -16,15 +16,13 @@
     box-sizing: border-box;
     margin: 20px;
     padding-left:10px;
-    width: 80vw ;
+    width: 80vw;
     margin-left: 10vw;
     margin-right: 10vw;
     border-radius: 10px;
-    size: 10px;
 }
 
 .input{
-    height: 10%;
     width: 100%;
     border: none;
     background-color: #161b22;
@@ -37,53 +35,81 @@
     color:#8b949e;
 }
 
-
 .pagination{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.btn-prev{
-    border: 1px solid ;
+.btn-prev, .btn-next{
+    border: 1px solid;
     color: #c9d1d9;
-    padding: 7px;
+    padding: 7px 15px;
     margin: 20px;
     border-radius: 10px;
     transition: all 0.25s ease;
-    text-align: center;
     cursor: pointer;
+    text-align: center;
 }
 
-.btn-prev:active{
-    background-color: #8b949e;
-}
-
-.btn-prev:hover{
+.btn-prev:hover,
+.btn-next:hover{
     transform: translate(-1px,-1px);
+}
+
+.btn-prev:active,
+.btn-next:active{
+    background-color: #8b949e;
 }
 
 .pages{
     color: #c9d1d9;
 }
 
-.btn-next{
-    color: #c9d1d9;
-    border: 1px solid;
-    border-radius: 10px;
-    padding: 7px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin: 20px;
-    transition: all 0.25s ease;
-    text-align: center;
-    cursor: pointer;
+
+
+
+/* ---------------------- RESPONSIVE ---------------------- */
+
+/* Tablets */
+@media (max-width: 768px){
+
+    .org-text{
+        margin-left: 6vw;
+        font-size: 18px;
+    }
+
+    .input-wrapper{
+        width: 88vw;
+        margin-left: 6vw;
+        margin-right: 6vw;
+    }
+
+    .btn-prev,
+    .btn-next{
+        margin: 10px;
+        padding: 6px 12px;
+        font-size: 14px;
+    }
 }
 
-.btn-next:hover{
-    transform: translate(-1px, -1px);
-}
+/* Mobile */
+@media (max-width: 480px){
 
-.btn-next:active{
-    background-color: #8b949e;
+    .org-text{
+        margin-left: 4vw;
+        font-size: 16px;
+    }
+
+    .input-wrapper{
+        width: 92vw;
+        margin-left: 4vw;
+        margin-right: 4vw;
+        gap: 6px;
+    }
+
+    .input{
+        font-size: 14px;
+        padding: 8px;
+    }
 }

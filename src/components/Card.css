@@ -25,11 +25,10 @@
 
 .organization-list .org-name{
     color: #c9d1d9;
-    font-size: 18px;
+    font-size: 20px;
     margin-bottom: 4px;
     font-weight: 600;
     padding-top: 1px;
-    font-size: 20px;
     padding-left: 20px;
     padding-bottom: 7px;
 }
@@ -47,7 +46,9 @@
     padding: 10px;
 }
 
-.open-issue{
+.open-issue,
+.close-issue,
+.contributors{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,21 +58,76 @@
     padding: 10px;
 }
 
-.close-issue{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color:#8b949e;
-    font-size: 14px;
-    gap: 5px;
-    padding: 10px;
+/* -------------------- MOBILE RESPONSIVE -------------------- */
+@media (max-width: 768px){
+
+    .org-container{
+        margin-left: 5vw;
+        margin-right: 5vw;
+    }
+
+    .organization-list{
+        width: 90vw;
+        height: auto;
+        padding: 15px 10px;
+    }
+
+    .issue-details{
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 5px 20px;
+        gap: 6px;
+    }
+
+    .open-issue,
+    .close-issue,
+    .contributors{
+        justify-content: flex-start;
+        padding: 5px 0;
+        font-size: 13px;
+    }
+
+    .organization-list .org-name{
+        font-size: 18px;
+    }
+
+    .organization-list .org-details{
+        font-size: 13px;
+        padding-left: 20px;
+        padding-right: 10px;
+    }
+    
+    .org-container:hover{
+    transform: translateY(-4px);
+    }
 }
-.contributors{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #8b949e;
-    font-size: 14px;
-    gap: 5px;
-    padding: 10px;
+
+@media (max-width: 480px){
+
+    .org-container{
+        margin-left: 3vw;
+        margin-right: 3vw;
+    }
+
+    .organization-list{
+        width: 94vw;
+        padding: 15px 10px;
+    }
+
+    .organization-list .org-name{
+        font-size: 16px;
+        padding-left: 12px;
+    }
+
+    .organization-list .org-details{
+        font-size: 12px;
+        padding-left: 12px;
+    }
+
+    .issue-details{
+        padding: 5px 12px;
+    }
+    .org-container:hover{
+    transform: translateY(-4px);
+    }
 }
