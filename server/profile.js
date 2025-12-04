@@ -1,65 +1,77 @@
+// Express router
 const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const multer = require('multer');                 // Handles file uploads (avatars)
+const path = require('path');                     // Helps build correct file paths
+const fs = require('fs');                         // Used to check/create upload folders
 const { findUserById, updateUserProfile, updateUserAvatar, db } = require('./db');
-const { requireAuth } = require('./auth');
+const { requireAuth } = require('./auth');        // Protect routes (must be logged in)
 
 const router = express.Router();
 
-// Configure multer for avatar uploads
+// -------------------- MULTER STORAGE SETUP --------------------
+// Controls where files are stored and how they are named
+
 const storage = multer.diskStorage({
+
+    // Set folder where avatars will be saved
+
     destination: function (req, file, cb) {
         const uploadDir = path.join(__dirname, '../public/uploads/avatars');
 
-        // Create directory if it doesn't exist
+        // If folder does NOT exist → create it
+
         if (!fs.existsSync(uploadDir)) {
             fs.mkdirSync(uploadDir, { recursive: true });
         }
 
-        cb(null, uploadDir);
+        cb(null, uploadDir); // Tell multer to save file here
     },
+
+    // Rename file to ensure each avatar gets a unique name
+    
     filename: function (req, file, cb) {
         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
         cb(null, 'avatar-' + uniqueSuffix + path.extname(file.originalname));
     }
 });
 
+// Multer configuration: where to store, size limit, allowed file types
 const upload = multer({
     storage: storage,
-    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    limits: { fileSize: 5 * 1024 * 1024 }, // Max size = 5MB
     fileFilter: function (req, file, cb) {
-        const allowedTypes = /jpeg|jpg|png|gif|webp/;
+        const allowedTypes = /jpeg|jpg|png|gif|webp/; // Allowed extensions
         const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = allowedTypes.test(file.mimetype);
+        const mimetype = allowedTypes.test(file.mimetype); // Check real MIME type
 
-        if (mimetype && extname) {
-            return cb(null, true);
-        } else {
-            cb(new Error('Only image files are allowed!'));
-        }
+        // Only allow the upload if file is an image
+        if (mimetype && extname) cb(null, true);
+        else cb(new Error('Only image files are allowed!'));
     }
 });
 
-// Get user profile
+// -------------------- GET PROFILE --------------------
+// Returns currently logged-in user's profile data
 router.get('/', requireAuth, (req, res) => {
     try {
+        // Fetch user by session userId
         const user = findUserById(req.session.userId);
 
         if (!user) {
             return res.status(404).json({ error: 'User not found' });
         }
 
-        // Parse social_links if it exists
+        // Convert stored JSON string → object
         let socialLinks = null;
         if (user.social_links) {
             try {
                 socialLinks = JSON.parse(user.social_links);
-            } catch (e) {
-                socialLinks = null;
+            } catch {
+                socialLinks = null; // If invalid JSON, ignore it
             }
         }
 
+        // Send cleaned user data to frontend
         res.json({
             id: user.id,
             email: user.email,
@@ -75,50 +87,48 @@ router.get('/', requireAuth, (req, res) => {
     }
 });
 
-// Update user profile
+// -------------------- UPDATE PROFILE --------------------
+// Allows user to change username, bio, location, social links
 router.put('/', requireAuth, (req, res) => {
     try {
-        console.log('Profile update request received');
-        console.log('Session userId:', req.session.userId);
-        console.log('Request body:', req.body);
-
         const { username, bio, location, social_links } = req.body;
 
-        // If username is being updated, check if it's already taken
+        // If username is changing → verify it's not taken by someone else
         if (username) {
-            const existingUser = db.prepare('SELECT id FROM users WHERE username = ? AND id != ?').get(username, req.session.userId);
+            const existingUser = db.prepare(
+                'SELECT id FROM users WHERE username = ? AND id != ?'
+            ).get(username, req.session.userId);
+
             if (existingUser) {
-                console.log('Username already taken:', username);
                 return res.status(400).json({ error: 'Username already taken' });
             }
         }
 
-        // Convert social_links object to JSON string
+        // Convert social links object → JSON string for DB
         const socialLinksJson = social_links ? JSON.stringify(social_links) : null;
 
+        // Build update object
         const updates = {
             bio: bio || null,
             location: location || null,
             social_links: socialLinksJson
         };
 
-        // Add username to updates if provided
-        if (username) {
-            updates.username = username;
-        }
+        // Add username if included
+        if (username) updates.username = username;
 
-        console.log('Updating profile with:', updates);
+        // Perform update in database
         updateUserProfile(req.session.userId, updates);
 
+        // Fetch the updated user from database
         const updatedUser = findUserById(req.session.userId);
-        console.log('Profile updated successfully');
 
-        // Parse social_links back to object
+        // Convert stored JSON string → object
         let parsedSocialLinks = null;
         if (updatedUser.social_links) {
             try {
                 parsedSocialLinks = JSON.parse(updatedUser.social_links);
-            } catch (e) {
+            } catch {
                 parsedSocialLinks = null;
             }
         }
@@ -137,19 +147,23 @@ router.put('/', requireAuth, (req, res) => {
         });
     } catch (error) {
         console.error('Error updating profile:', error);
-        console.error('Error stack:', error.stack);
-        res.status(500).json({ error: 'Failed to update profile', details: error.message });
+        res.status(500).json({ error: 'Failed to update profile' });
     }
 });
 
-// Upload avatar
+// -------------------- UPLOAD AVATAR --------------------
+// Saves uploaded avatar and updates the user's avatar_url
 router.post('/avatar', requireAuth, upload.single('avatar'), (req, res) => {
     try {
+        // If no file is sent
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded' });
         }
 
+        // Build the URL where the image will be accessible
         const avatarUrl = `/uploads/avatars/${req.file.filename}`;
+
+        // Save new avatar URL in database
         updateUserAvatar(req.session.userId, avatarUrl);
 
         res.json({
@@ -162,4 +176,5 @@ router.post('/avatar', requireAuth, upload.single('avatar'), (req, res) => {
     }
 });
 
+// Export router so it can be used in main server file
 module.exports = router;

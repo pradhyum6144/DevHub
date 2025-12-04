@@ -37,10 +37,11 @@ function IssueList({ issues }) {
           placeholder="Search issues..."
           onChange={(e)=> setSearchIssue(e.target.value)}
         />
-      </div>
 
-      <div className="issue-card">
+
+        <div className="issue-card" >
         {currentIssues.map((issue) =>
+         <div onClick={() => window.open(issue.url, "_blank")}> 
 
           <div className="issue-row" key={issue.id}>
             <div className="issue-Details">
@@ -51,7 +52,12 @@ function IssueList({ issues }) {
               <p className="change">{issue.status}</p>
             </div>
           </div>
+         </div>
+
         )}
+      </div>
+
+
       </div>
       <div className="pagination-info">
         <div className='prev-btn'>
