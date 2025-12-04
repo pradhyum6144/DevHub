@@ -1,10 +1,8 @@
 const Database = require('better-sqlite3');
 const path = require('path');
 
-// Create or open database
 const db = new Database(path.join(__dirname, 'devhub.db'));
 
-// Create users table if it doesn't exist
 db.exec(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,13 +17,10 @@ db.exec(`
   )
 `);
 
-// Migration: Add profile columns if they don't exist (for existing databases)
 try {
-    // Check if bio column exists
     const tableInfo = db.prepare("PRAGMA table_info(users)").all();
     const columnNames = tableInfo.map(col => col.name);
 
-    // Add missing columns
     if (!columnNames.includes('bio')) {
         console.log('Adding bio column to users table...');
         db.exec('ALTER TABLE users ADD COLUMN bio TEXT');
@@ -47,8 +42,6 @@ try {
     console.error('Error during database migration:', error);
 }
 
-
-// Create navigation history table
 db.exec(`
   CREATE TABLE IF NOT EXISTS navigation_history (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -61,7 +54,6 @@ db.exec(`
   )
 `);
 
-// Create chat messages table
 db.exec(`
   CREATE TABLE IF NOT EXISTS chat_messages (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -73,29 +65,24 @@ db.exec(`
   )
 `);
 
-// Database operations
 module.exports = {
-    db, // Export db instance for direct queries
+    db,
 
-    // Find user by email
     findUserByEmail: (email) => {
         const stmt = db.prepare('SELECT * FROM users WHERE email = ?');
         return stmt.get(email);
     },
 
-    // Find user by username
     findUserByUsername: (username) => {
         const stmt = db.prepare('SELECT * FROM users WHERE username = ?');
         return stmt.get(username);
     },
 
-    // Find user by ID
     findUserById: (id) => {
         const stmt = db.prepare('SELECT * FROM users WHERE id = ?');
         return stmt.get(id);
     },
 
-    // Create new user
     createUser: (email, username, hashedPassword) => {
         const stmt = db.prepare(
             'INSERT INTO users (email, username, password) VALUES (?, ?, ?)'
@@ -104,12 +91,10 @@ module.exports = {
         return result.lastInsertRowid;
     },
 
-    // Update user profile
     updateUserProfile: (userId, profileData) => {
         const fields = [];
         const values = [];
 
-        // Dynamically build UPDATE query based on provided fields
         if (profileData.username !== undefined) {
             fields.push('username = ?');
             values.push(profileData.username);
@@ -134,13 +119,11 @@ module.exports = {
         return stmt.run(...values);
     },
 
-    // Update user avatar
     updateUserAvatar: (userId, avatarUrl) => {
         const stmt = db.prepare('UPDATE users SET avatar_url = ? WHERE id = ?');
         return stmt.run(avatarUrl, userId);
     },
 
-    // Add navigation history entry
     addNavigationHistory: (userId, itemType, itemName, itemUrl) => {
         const stmt = db.prepare(
             'INSERT INTO navigation_history (user_id, item_type, item_name, item_url) VALUES (?, ?, ?, ?)'
@@ -148,7 +131,6 @@ module.exports = {
         return stmt.run(userId, itemType, itemName, itemUrl);
     },
 
-    // Get navigation history for a user
     getNavigationHistory: (userId, limit = 10) => {
         const stmt = db.prepare(
             'SELECT * FROM navigation_history WHERE user_id = ? ORDER BY visited_at DESC LIMIT ?'
@@ -156,7 +138,6 @@ module.exports = {
         return stmt.all(userId, limit);
     },
 
-    // Save chat message
     saveChatMessage: (userId, message, response) => {
         const stmt = db.prepare(
             'INSERT INTO chat_messages (user_id, message, response) VALUES (?, ?, ?)'
@@ -164,7 +145,6 @@ module.exports = {
         return stmt.run(userId, message, response);
     },
 
-    // Get chat history for a user
     getChatHistory: (userId, limit = 20) => {
         const stmt = db.prepare(
             'SELECT * FROM chat_messages WHERE user_id = ? ORDER BY created_at DESC LIMIT ?'

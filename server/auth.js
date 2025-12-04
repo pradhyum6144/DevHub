@@ -1,11 +1,23 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const { findUserByEmail, findUserByUsername, findUserById, createUser } = require('./db');
+const jwt = require('jsonwebtoken');
 
 const router = express.Router();
 
-// Middleware to check if user is authenticated
 function requireAuth(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7);
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key-change-this-in-production');
+            req.userId = decoded.userId;
+            return next();
+        } catch (error) {
+            console.log('JWT verification failed:', error.message);
+        }
+    }
+
     console.log('Session check:', {
         hasSession: !!req.session,
         userId: req.session?.userId,
@@ -13,22 +25,21 @@ function requireAuth(req, res, next) {
     });
 
     if (!req.session.userId) {
-        console.log('Authentication failed: No userId in session');
+        console.log('Authentication failed: No userId in session or valid token');
         return res.status(401).json({ error: 'Not authenticated' });
     }
+
+    req.userId = req.session.userId;
     next();
 }
 
-// Sign up route
 router.post('/signup', async (req, res) => {
     const { email, username, password } = req.body;
 
-    // Validate input
     if (!email || !username || !password) {
         return res.status(400).json({ error: 'All fields are required' });
     }
 
-    // Check if user already exists
     if (findUserByEmail(email)) {
         return res.status(400).json({ error: 'Email already registered' });
     }
@@ -37,22 +48,26 @@ router.post('/signup', async (req, res) => {
         return res.status(400).json({ error: 'Username already taken' });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Create user
     try {
         const userId = createUser(email, username, hashedPassword);
         const user = findUserById(userId);
 
-        // Create session
         req.session.userId = userId;
+
+        const token = jwt.sign(
+            { userId: userId },
+            process.env.JWT_SECRET || 'your-secret-key-change-this-in-production',
+            { expiresIn: '7d' }
+        );
 
         req.session.save((err) => {
             if (err) {
                 return res.status(500).json({ error: 'Session creation failed' });
             }
             res.json({
+                token,
                 user: {
                     id: user.id,
                     email: user.email,
@@ -69,35 +84,37 @@ router.post('/signup', async (req, res) => {
     }
 });
 
-// Login route
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // Validate input
     if (!email || !password) {
         return res.status(400).json({ error: 'Email and password are required' });
     }
 
-    // Find user by email
     const user = findUserByEmail(email);
     if (!user) {
         return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Verify password
     const isValidPassword = await bcrypt.compare(password, user.password);
     if (!isValidPassword) {
         return res.status(401).json({ error: 'Invalid email or password' });
     }
 
-    // Create session
     req.session.userId = user.id;
+
+    const token = jwt.sign(
+        { userId: user.id },
+        process.env.JWT_SECRET || 'your-secret-key-change-this-in-production',
+        { expiresIn: '7d' }
+    );
 
     req.session.save((err) => {
         if (err) {
             return res.status(500).json({ error: 'Login failed' });
         }
         res.json({
+            token,
             user: {
                 id: user.id,
                 email: user.email,
@@ -110,7 +127,6 @@ router.post('/login', async (req, res) => {
     });
 });
 
-// Logout route
 router.post('/logout', (req, res) => {
     req.session.destroy((err) => {
         if (err) {
@@ -120,16 +136,34 @@ router.post('/logout', (req, res) => {
     });
 });
 
-// Verify session route
 router.get('/verify', (req, res) => {
-    if (!req.session.userId) {
+    let userId = null;
+
+    const authHeader = req.headers.authorization;
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.substring(7);
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET || 'your-secret-key-change-this-in-production');
+            userId = decoded.userId;
+        } catch (error) {
+            console.log('JWT verification failed:', error.message);
+        }
+    }
+
+    if (!userId && req.session.userId) {
+        userId = req.session.userId;
+    }
+
+    if (!userId) {
         return res.status(401).json({ error: 'Not authenticated' });
     }
 
-    const user = findUserById(req.session.userId);
+    const user = findUserById(userId);
 
     if (!user) {
-        req.session.destroy();
+        if (req.session.userId) {
+            req.session.destroy();
+        }
         return res.status(401).json({ error: 'User not found' });
     }
 

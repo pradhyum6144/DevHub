@@ -4,33 +4,23 @@ const { requireAuth } = require('./auth');
 
 const router = express.Router();
 
-// Track navigation event
 router.post('/track', requireAuth, (req, res) => {
     try {
-        const { item_type, item_name, item_url } = req.body;
+        const { itemType, itemName, itemUrl } = req.body;
 
-        if (!item_type || !item_name) {
-            return res.status(400).json({ error: 'item_type and item_name are required' });
+        if (!itemType || !itemName) {
+            return res.status(400).json({ error: 'itemType and itemName are required' });
         }
 
-        // Validate item_type
-        const validTypes = ['organization', 'project', 'issue'];
-        if (!validTypes.includes(item_type)) {
-            return res.status(400).json({
-                error: 'item_type must be one of: organization, project, issue'
-            });
-        }
+        addNavigationHistory(req.userId, itemType, itemName, itemUrl || null);
 
-        addNavigationHistory(req.userId, item_type, item_name, item_url || null);
-
-        res.json({ message: 'Navigation tracked successfully' });
+        res.json({ success: true });
     } catch (error) {
         console.error('Error tracking navigation:', error);
         res.status(500).json({ error: 'Failed to track navigation' });
     }
 });
 
-// Get navigation history
 router.get('/', requireAuth, (req, res) => {
     try {
         const limit = parseInt(req.query.limit) || 10;
