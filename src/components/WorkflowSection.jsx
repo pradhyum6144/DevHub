@@ -41,7 +41,7 @@ export default function WorkflowSection() {
                                     </div>
                                     <div>
                                         <h3 className="text-base sm:text-lg font-semibold text-white mb-1 sm:mb-2">
-                                            DevHub Copilot AI
+                                            DevHub Gemini AI
                                         </h3>
                                         <p className="text-slate-400 text-xs sm:text-sm">
                                             The AI-powered development assistant is now fully integrated. Developers can:
